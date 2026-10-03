@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #f1ebdd;
+  --card: #f8f4ea;
+  --ink: #171717;
+  --mut: #6b6250;
+  --line: #d9ceb6;
+  --brand: #2c6644;
+}
+.dark {
+  --bg: #121110;
+  --card: #1b1a18;
+  --ink: #f1ebdd;
+  --mut: #a89f8a;
+  --line: #333029;
+  --brand: #9bd4ae;
+}
+
+/* The scrollbar space is always reserved, so the page never shifts sideways
+   when content becomes taller or shorter (e.g. after switching language). */
+html {
+  scroll-behavior: smooth;
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+}
+body {
+  @apply bg-bg font-sans text-ink antialiased;
+  transition: background-color .35s ease, color .35s ease;
+}
+button { cursor: pointer; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+
+@layer components {
+  .btn { @apply bg-ink px-8 py-3 text-xs uppercase tracking-[.16em] text-bg transition duration-300 hover:-translate-y-px hover:bg-gold hover:text-[#171717] active:scale-95; }
+  .btn-o { @apply border border-ink bg-transparent text-ink hover:bg-ink hover:text-bg; }
+  .input { @apply mb-3 mt-1 w-full border border-line bg-transparent p-3 outline-none transition focus:border-gold; }
+  .note { @apply my-4 border-l-2 border-gold pl-3 text-xs text-mut; }
+  .art { @apply relative flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#26221c] via-[#171717] to-[#3a2a1a] text-gold; }
+  .art::before { content: ""; @apply pointer-events-none absolute inset-3 border border-gold/30; }
+}
